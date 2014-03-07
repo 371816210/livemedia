@@ -1,20 +1,10 @@
 LOCAL_PATH := $(call my-dir)
-
 include $(CLEAR_VARS)
-
-
-
-
-
 LOCAL_MODULE := liblive
-
 LOCAL_ARM_MODE := arm
-
 LOCAL_PRELINK_MODULE := false
-
 LOCAL_CPPFLAGS := \
    -DNULL=0 -DSOCKLEN_T=socklen_t -DNO_SSTREAM -DBSD=1 -DNO_SSTREAM -fexceptions -DANDROID -DXLOCALE_NOT_USED
-   
    
 LOCAL_C_INCLUDES := \
  $(LOCAL_PATH) \
@@ -27,16 +17,7 @@ LOCAL_C_INCLUDES := \
  $(LOCAL_PATH)/groupsock \
   $(LOCAL_PATH)/groupsock/include \
 
-
-
 LOCAL_MODULE_TAGS := optional
-
-
-
-
-
-
-
 
 LOCAL_SRC_FILES := \
 liveMedia/AC3AudioFileServerMediaSubsession.cpp \
@@ -202,23 +183,51 @@ liveMedia/VP8VideoRTPSource.cpp \
 liveMedia/WAVAudioFileServerMediaSubsession.cpp \
 liveMedia/WAVAudioFileSource.cpp \
 liveMedia/rtcp_from_spec.c \
-       BasicUsageEnvironment/BasicHashTable.cpp \
-       BasicUsageEnvironment/BasicTaskScheduler.cpp \
-       BasicUsageEnvironment/BasicTaskScheduler0.cpp \
-       BasicUsageEnvironment/BasicUsageEnvironment.cpp \
-       BasicUsageEnvironment/BasicUsageEnvironment0.cpp \
-       BasicUsageEnvironment/DelayQueue.cpp \
-       UsageEnvironment/HashTable.cpp \
-       UsageEnvironment/UsageEnvironment.cpp \
-       UsageEnvironment/strDup.cpp \
-       groupsock/GroupsockHelper.cpp \
-       groupsock/GroupEId.cpp \
-       groupsock/inet.c \
-       groupsock/Groupsock.cpp \
-       groupsock/NetInterface.cpp \
-       groupsock/NetAddress.cpp \
-       groupsock/IOHandlers.cpp \
+BasicUsageEnvironment/BasicHashTable.cpp \
+BasicUsageEnvironment/BasicTaskScheduler.cpp \
+BasicUsageEnvironment/BasicTaskScheduler0.cpp \
+BasicUsageEnvironment/BasicUsageEnvironment.cpp \
+BasicUsageEnvironment/BasicUsageEnvironment0.cpp \
+BasicUsageEnvironment/DelayQueue.cpp \
+UsageEnvironment/HashTable.cpp \
+UsageEnvironment/UsageEnvironment.cpp \
+UsageEnvironment/strDup.cpp \
+groupsock/GroupsockHelper.cpp \
+groupsock/GroupEId.cpp \
+groupsock/inet.c \
+groupsock/Groupsock.cpp \
+groupsock/NetInterface.cpp \
+groupsock/NetAddress.cpp \
+groupsock/IOHandlers.cpp \
        
-
 include $(BUILD_SHARED_LIBRARY)
 #include $(BUILD_STATIC_LIBRARY)
+
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := LiveMediaServer
+LOCAL_SRC_FILES := \
+mediaServer/DynamicRTSPServer.cpp \
+mediaServer/live555MediaServer.cpp \
+
+
+LOCAL_C_INCLUDES := \
+ $(LOCAL_PATH) \
+ $(LOCAL_PATH)/liveMedia \
+ $(LOCAL_PATH)/liveMedia/include \
+ $(LOCAL_PATH)/BasicUsageEnvironment/include \
+ $(LOCAL_PATH)/BasicUsageEnvironment \
+ $(LOCAL_PATH)/UsageEnvironment/include \
+ $(LOCAL_PATH)/UsageEnvironment \
+ $(LOCAL_PATH)/groupsock \
+ $(LOCAL_PATH)/groupsock/include \
+ $(LOCAL_PATH)/mediaServer \
+
+LOCAL_SHARED_LIBRARIES := liblive
+include $(BUILD_EXECUTABLE)
+
+
+
+
+
+
